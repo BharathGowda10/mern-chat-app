@@ -12,8 +12,11 @@ import { fileURLToPath } from "url";
 const __filename = fileURLToPath(import.meta.url);
 
 dotenv.config();
+console.log("Registering middleware: express.json");
 app.use(express.json({ limit: "5mb" }));
+console.log("Registering middleware: cookieParser");
 app.use(cookieParser());
+console.log("Registering middleware: cors");
 app.use(
   cors({
     origin: "http://localhost:5173",
@@ -22,12 +25,16 @@ app.use(
 );
 const __dirname = path.dirname(__filename);
 
+console.log("Registering route: /api/auth");
 app.use("/api/auth", authRoute);
+console.log("Registering route: /api/message");
 app.use("/api/message", messageRoute);
 
 if (process.env.NODE_ENV === "production") {
+  console.log("Registering static file serving for production");
   app.use(express.static(path.join(__dirname, "../frontend/dist")));
 
+  console.log("Registering wildcard route: *");
   app.get("*", (req, res) => {
     res.sendFile(path.join(__dirname, "../frontend", "dist", "index.html"));
   });
