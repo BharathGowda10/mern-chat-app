@@ -7,6 +7,9 @@ import messageRoute from "./route/message.route.js";
 import cors from "cors";
 import path from "path";
 import { app, server } from "./config/socket.js";
+import { fileURLToPath } from "url";
+
+const __filename = fileURLToPath(import.meta.url);
 
 dotenv.config();
 app.use(express.json({ limit: "5mb" }));
@@ -17,7 +20,7 @@ app.use(
     credentials: true,
   })
 );
-const __dirname = path.resolve();
+const __dirname = path.dirname(__filename);
 
 app.use("/api/auth", authRoute);
 app.use("/api/message", messageRoute);
