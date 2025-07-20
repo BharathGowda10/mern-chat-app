@@ -7,9 +7,6 @@ import messageRoute from "./route/message.route.js";
 import cors from "cors";
 import path from "path";
 import { app, server } from "./config/socket.js";
-import { fileURLToPath } from "url";
-
-const __filename = fileURLToPath(import.meta.url);
 
 dotenv.config();
 console.log("Registering middleware: express.json");
@@ -23,7 +20,7 @@ app.use(
     credentials: true,
   })
 );
-const __dirname = path.dirname(__filename);
+const __dirname = path.resolve();
 
 console.log("Registering route: /api/auth");
 app.use("/api/auth", authRoute);
