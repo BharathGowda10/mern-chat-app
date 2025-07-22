@@ -30,7 +30,7 @@ const ChatCard = ({ user, handleUserClick }) => {
           </p>
         </div>
       </div>
-      <div className="hidden lg:inline-flex items-center text-base text-green-500 font-semibold text-gray-900 dark:text-white">
+      <div className="hidden text-xs lg:inline-flex items-center text-base text-green-500 font-semibold text-gray-900 dark:text-white">
         {formatTime(user.createdAt)}
       </div>
     </div>

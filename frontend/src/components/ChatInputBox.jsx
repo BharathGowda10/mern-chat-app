@@ -2,6 +2,7 @@ import { useRef, useState } from "react";
 import { Image, Send, X } from "lucide-react";
 import { useMessageStore } from "../store/useMessageStore";
 import imageCompression from "browser-image-compression";
+import AudioRecorder from "./AudioRecorder";
 
 const ChatInputBox = () => {
   const { sendMessage, selectedUser } = useMessageStore();
@@ -14,6 +15,10 @@ const ChatInputBox = () => {
     if (file && file.type.startsWith("image/")) {
       setImageFile(file);
     }
+  };
+
+  const handleSpeechToText = (text) => {
+    setMessage(text);
   };
 
   const handleRemoveImage = () => {
@@ -99,6 +104,9 @@ const ChatInputBox = () => {
           onChange={handleImageChange}
           className="hidden"
         />
+
+        {/* microphone */}
+        <AudioRecorder onTranscribe={handleSpeechToText} />
 
         {/* Send Button */}
         <button

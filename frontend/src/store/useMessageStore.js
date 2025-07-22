@@ -32,6 +32,29 @@ export const useMessageStore = create((set, get) => ({
   sendMessage: async (messageData, receiverId) => {
     const { messages } = get();
     try {
+      if (receiverId === "ai-assistant") {
+        const userMessage = {
+          _id: Date.now().toString() + "-user",
+          senderId: useAuthStore.getState().authUser.user._id,
+          receiverId: "ai-assistant",
+          text: messageData.text,
+          image: null,
+          createdAt: new Date().toISOString(),
+        };
+        const res = await axiosInstance.post("/message/ai", {
+          prompt: messageData.text,
+        });
+        const aiMessage = {
+          _id: Date.now().toString() + "-ai",
+          senderId: "ai-assistant",
+          receiverId: useAuthStore.getState().authUser.user._id,
+          text: res.data.text,
+          image: null,
+          createdAt: new Date().toISOString(),
+        };
+        set({ messages: [...messages, userMessage, aiMessage] });
+        return;
+      }
       const res = await axiosInstance.post(
         `/message/send/${receiverId}`,
         messageData

@@ -25,7 +25,7 @@ const LoginPage = () => {
   return (
     <div className="backgroundImg h-screen w-screen flex justify-center items-center">
       <div className="absolute inset-0 bg-black opacity-60"></div>
-      <div className="relative z-10 w-full sm:max-w-md xs:max-w-32 p-4 sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700">
+      <div className="relative z-10 w-full sm:max-w-md xs:max-w-64 p-4 sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700">
         <form className="space-y-6" onSubmit={handleSubmit}>
           <h5 className="text-3xl font-bold text-white dark:text-white">
             Login To Chat App
